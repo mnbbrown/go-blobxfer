@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/codegangsta/cli"
 	"os"
 	"path/filepath"
@@ -44,6 +45,12 @@ func main() {
 			Usage:  "The storage account key to use",
 			EnvVar: "STORAGE_ACCOUNT_KEY",
 		},
+	}
+	app.Action = func(ctx *cli.Context) {
+		storageAccount := os.Args[1]
+		container := os.Args[2]
+		source := os.Args[3]
+		fmt.Printf("Uploading %s to %s/%s\n", source, storageAccount, container)
 	}
 	app.Run(os.Args)
 }
